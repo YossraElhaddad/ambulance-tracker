@@ -6,8 +6,9 @@ const express = require('express');
 const unirest = require('unirest');
 const axios = require('axios');
 
-exports.hospitalData = async (req, res) => {
-
+exports.hospitalData = async (req, res, next) => {
+  if(req.query.source&&req.query.dest_id)
+  return next();
     let idAddress = req.header('x-forwarded-for') || req.remoteAddress;
     var options = {
         method: 'GET',
@@ -40,4 +41,5 @@ exports.hospitalData = async (req, res) => {
     }).catch(function (error) {
         console.error(error);
     });
+    next();
 };

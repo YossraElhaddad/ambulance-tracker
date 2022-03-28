@@ -17,7 +17,7 @@ app.set('trust proxy', true);
 //   else return false
 // })
 
-app.use(express.json());
+//app.use(express.json());
 app.use(userRouter);
 
 app.get('/', (req, res) => {
@@ -34,4 +34,6 @@ app.get('/', (req, res) => {
 
 app.listen(port, () => {
     console.log("port is listening");
-})
+});
+
+
