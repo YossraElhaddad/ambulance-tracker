@@ -2,19 +2,19 @@ const axios = require('axios');
 
 
 exports.getEstimatedArrivalTime = async(req, res)=>{
-  if(req.query.source &&req.query.dest_id){
-    const [userLat, userLon] = req.query.source.split(',');
+  if(req.query.destination &&req.query.source_id){
+    const [userLat, userLon] = req.query.destination.split(',');
   
     //const userLat = req.body.source.latitude || req.query.source_lat; //depending on how the request info will be sent to the server
     //const userLon  = req.body.source.longitude || req.query.source_lon;
 
     //let driverLat = req.body.dest.latitude;
     //let driverLon = req.body.dest.longitude;
-    const destinationID = req.query.dest_id;
+    const sourceID = req.query.source_id;
 
     let config = {
         method: 'GET',
-        url: 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + userLat + '%2C' + userLon + '&destinations=place_id:' + destinationID + '&mode=driving&key=AIzaSyDL8wShrGK7XCtbxs-F7B5Q7oYUpEjp_R0',
+        url: 'https://maps.googleapis.com/maps/api/distancematrix/json?destinations=' + userLat + '%2C' + userLon + '&origins=place_id:' + sourceID + '&mode=driving&key=AIzaSyDL8wShrGK7XCtbxs-F7B5Q7oYUpEjp_R0',
         headers: {}
     }
 

@@ -7,7 +7,7 @@ const unirest = require('unirest');
 const axios = require('axios');
 
 exports.hospitalData = async (req, res, next) => {
-  if(req.query.source&&req.query.dest_id)
+  if(req.query.destination&&req.query.source_id)
   return next();
     let idAddress = req.header('x-forwarded-for') || req.remoteAddress;
     var options = {
