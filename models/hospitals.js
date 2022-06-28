@@ -1,13 +1,7 @@
-	
-const requestIp = require('request-ip');
-const http = require('http');
-const ip = require('ip');
-const express = require('express');
-const unirest = require('unirest');
 const axios = require('axios');
 
 exports.hospitalData = async (req, res, next) => {
-  if(req.query.destination&&req.query.source_id)
+  if(req.query.destination && req.query.source_id)
   return next();
     let idAddress = req.header('x-forwarded-for') || req.remoteAddress;
     var options = {
@@ -21,7 +15,6 @@ exports.hospitalData = async (req, res, next) => {
     };
     
     axios.request(options).then(function (response) {
-        console.log(response.data);
         const lat = response.data.latitude;
         const lng = response.data.longitude;
 
@@ -33,7 +26,7 @@ exports.hospitalData = async (req, res, next) => {
           
           axios(config)
           .then(function (response) {
-            res.send(response.data.results);
+            res.send(response.data);
           })
           .catch(function (error) {
             console.log(error);
@@ -41,5 +34,5 @@ exports.hospitalData = async (req, res, next) => {
     }).catch(function (error) {
         console.error(error);
     });
-    next();
+
 };
